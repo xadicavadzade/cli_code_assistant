@@ -1,10 +1,10 @@
 from openai import OpenAI
-from api_config import ApiConfig
-from prompt import Prompt
+from api_config import APIConfig
+from prompt import PromptBuilder
 
 
-configs = ApiConfig()
-prompt = Prompt()
+configs = APIConfig()
+prompt = PromptBuilder()
 
 client = OpenAI(
     api_key=configs.api_key,
@@ -32,8 +32,8 @@ while True:
         response = client.chat.completions.create(
             model=configs.model,
             messages=messages,
-            temperature=configs.temprature,  
-            max_tokens=configs.max_tokes
+            temperature=configs.temperature,  
+            max_tokens=configs.max_tokens
             )
         response = response.choices[0].message.content
         messages.append({'role': 'assistant', 'content': response})
